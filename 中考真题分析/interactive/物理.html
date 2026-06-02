@@ -7,32 +7,39 @@
 @media(prefers-color-scheme:dark){:root{--bg:#0d1117;--fg:#e6edf3;--mut:#9aa4b0;--line:#222a33;--card:#161b22}}
 *{box-sizing:border-box}
 body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--fg)}
-.wrap{max-width:980px;margin:0 auto;padding:14px}
+.wrap{max-width:1180px;margin:0 auto;padding:14px}
 a.back{color:var(--c);text-decoration:none;font-size:14px}
 h1{font-size:20px;margin:.3em 0 .1em}
 .hint{color:var(--mut);font-size:13px;margin:.2em 0 .6em}
-#plot{width:100%;height:62vh;min-height:360px;background:var(--card);border:1px solid var(--line);border-radius:12px}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
-.chip{font-size:12.5px;padding:3px 9px;border-radius:13px;border:1px solid var(--line);display:flex;align-items:center;gap:5px}
-.chip i{width:9px;height:9px;border-radius:50%;background:var(--cc);display:inline-block}
-#detail{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:12px;padding:14px;margin-top:12px}
+/* 左右分栏联动：左散点图、右详情面板，同屏并排，hover 即时出题、零滚动 */
+.stage{display:flex;gap:14px;align-items:stretch}
+.left{flex:1.35;min-width:0;display:flex;flex-direction:column}
+#plot{width:100%;height:calc(100vh - 200px);min-height:420px;background:var(--card);border:1px solid var(--line);border-radius:12px}
+#detail{flex:1;min-width:340px;max-width:520px;height:calc(100vh - 200px);min-height:420px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:12px;padding:14px;position:sticky;top:12px;display:flex;flex-direction:column;overflow:hidden}
 #detail .meta{font-size:13px;color:var(--mut);margin-bottom:6px}
 #detail .kps{margin-bottom:8px}
-/* 固定高度、内部滚动的题目容器：换题时整页高度不变，避免页面跳动 */
-.qbox{height:46vh;min-height:240px;overflow:auto;border-radius:8px}
+.qbox{flex:1;min-height:0;overflow:auto;border-radius:8px}      /* 题目在面板内部滚动，整页不动 */
 .qbox .q{font-size:15px;line-height:1.7;white-space:pre-wrap}
 .qimg{max-width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:8px;background:#fff}
 .ph{color:var(--mut)}
+@media(max-width:860px){                                          /* 窄屏退化为上下堆叠 */
+  .stage{display:block}
+  #plot{height:56vh}
+  #detail{height:auto;max-width:none;position:static;margin-top:12px;display:block}
+  .qbox{height:44vh}
+}
 .kp{display:inline-block;background:color-mix(in srgb,var(--c) 14%,transparent);color:var(--c);border-radius:10px;padding:1px 8px;font-size:12.5px;margin:2px 3px 0 0}
 </style></head><body><div class="wrap">
 <a class="back" href="../index.html">← 返回总报告</a>
 <h1 style="color:var(--c)">物理｜知识点语义聚类</h1>
-<div class="hint">BGE-large-zh 语义向量 · 每个点是一道题，按知识点/概念聚类。<b>电脑悬停</b>或<b>手机点击</b>圆点 → 下方显示该题<b>原题截图</b>（含图表，英语为文字）。点图例可隐藏/显示某簇。</div>
-<div id="plot"></div>
-<div id="detail">
-  <div class="meta" id="dmeta"></div>
-  <div class="kps" id="dkps"></div>
-  <div class="qbox" id="dbox"><span class="ph">👆 悬停或点击任意圆点，这里显示对应原题与考点。</span></div>
+<div class="hint">BGE-large-zh 语义向量 · 每个点是一道题，按知识点/概念聚类。<b>悬停</b>圆点 → <b>右侧即时显示该题原题截图</b>（含图表，英语为文字），全程无需上下滚动。点图例可隐藏/显示某簇。</div>
+<div class="stage">
+  <div class="left"><div id="plot"></div></div>
+  <div id="detail">
+    <div class="meta" id="dmeta"></div>
+    <div class="kps" id="dkps"></div>
+    <div class="qbox" id="dbox"><span class="ph">👆 把鼠标移到任意圆点，这里即时显示该题原题截图与考点。</span></div>
+  </div>
 </div>
 </div>
 <script>
