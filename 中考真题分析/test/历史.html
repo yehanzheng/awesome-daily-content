@@ -78,7 +78,7 @@ lb.addEventListener('click', closeLB);
 // 全屏 PDF 浮窗：在试卷中看该题（含材料），PDF 走 Cloudflare R2
 const pdfbox=document.getElementById('pdfbox'), pdfv=document.getElementById('pdfv'), pdfbtn=document.getElementById('pdfbtn'), pdftitle=document.getElementById('pdftitle');
 let curPage=0, curPaper='';
-function openPDF(){ if(!curPage||!curPaper) return; pdftitle.textContent=curPaper.replace('_','年 ')+'卷 · 第 '+curPage+' 页'; pdfv.src='https://pub-e7f17b08dc9449eb886cc12ad017ddc0.r2.dev/v1/%E9%A2%98%E6%BA%90/'+encodeURIComponent(curPaper)+'.pdf#page='+curPage+'&view=FitH&_='+Date.now(); pdfbox.classList.add('open'); }
+function openPDF(){ if(!curPage||!curPaper) return; pdftitle.textContent=curPaper.replace('_','年 ')+'卷 · 第 '+curPage+' 页'; pdfv.src='https://pub-e7f17b08dc9449eb886cc12ad017ddc0.r2.dev/v1/%E9%A2%98%E6%BA%90/'+encodeURIComponent(curPaper)+'.pdf#page='+curPage+'&view=Fit&_='+Date.now(); pdfbox.classList.add('open'); }
 function closePDF(){ pdfbox.classList.remove('open'); pdfv.removeAttribute('src'); }
 pdfbtn.addEventListener('click', openPDF);
 document.getElementById('pdfx').addEventListener('click', closePDF);
