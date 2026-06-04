@@ -38,10 +38,10 @@ h1{font-size:20px;margin:.3em 0 .1em}
 .lb-x{position:fixed;top:14px;right:18px;background:#fff;color:#111;border:0;border-radius:20px;padding:6px 15px;font-size:15px;font-weight:600;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.5);z-index:61}
 /* 全屏 PDF 浮窗：在试卷中看该题（含材料） */
 .pdfbox{position:fixed;inset:0;background:#111;display:none;z-index:70}
-.pdfbox.open{display:block}
-.pdf-bar{position:fixed;top:0;left:0;right:0;height:46px;background:#1a1a1a;color:#eee;display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:71;font-size:14px}
+.pdfbox.open{display:flex;flex-direction:column}    /* flex 纵向，iframe 撑满 */
+.pdf-bar{flex:none;height:46px;background:#1a1a1a;color:#eee;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-size:14px}
 .pdf-x{background:#fff;color:#111;border:0;border-radius:18px;padding:5px 14px;font-size:14px;font-weight:600;cursor:pointer}
-#pdfv{position:absolute;top:46px;left:0;right:0;bottom:0;width:100%;border:0;background:#fff}
+#pdfv{flex:1 1 auto;min-height:0;width:100%;border:0;background:#fff}
 .kp{display:inline-block;background:color-mix(in srgb,var(--c) 14%,transparent);color:var(--c);border-radius:10px;padding:1px 8px;font-size:12.5px;margin:2px 3px 0 0}
 </style></head><body><div class="wrap">
 <a class="back" href="../index.html">← 返回总报告</a>
