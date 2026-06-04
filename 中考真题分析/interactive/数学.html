@@ -65,7 +65,7 @@ function openLB(src){ if(!src) return; lbimg.src=src; lb.classList.add('open'); 
 function closeLB(){ lb.classList.remove('open'); lbimg.removeAttribute('src'); }
 lb.addEventListener('click', closeLB);
 document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLB(); });
-const PACKURL='题图包/'+encodeURIComponent('数学')+'.json';
+const PACKURL='https://pub-e7f17b08dc9449eb886cc12ad017ddc0.r2.dev/v1/%E9%A2%98%E5%9B%BE%E5%8C%85/'+encodeURIComponent('数学')+'.json';
 let PACK=null, packState=0; const waiters=[];   // 0未载/1载入中/2成功/3失败
 function ensurePack(cb){
   if(packState===2||packState===3){cb();return;}
